@@ -64,14 +64,14 @@
 							,sysdate
 						</otherwise>
 					</choose>
-					
 				)
 	</insert>
 	<!-- 수정 -->
-<update id="updateEmpInfo">
+	<update id="updateEmpInfo">
 		UPDATE emp 
 		SET
-		empname = #{emp.empname}
+		empname = #{e
+		mp.empname}
 		,sal = #{emp.sal}
 		,mgr = #{emp.mgr}
 		,deptid = #{emp.deptid}
