@@ -12,7 +12,6 @@ public class Restaurant {
 		System.out.println("생성자 인젝션");
 		this.chef = chef;
 	}
-	
 	Restaurant(){}
 	@Autowired
 	public void setChef(Chef chef) {
@@ -20,7 +19,6 @@ public class Restaurant {
 		this.chef = chef;
 		//  <beans:property name="chef" ref="cf" />  얘가 필요함 ...
 	}
-	
 	public void run() {
 		chef.cooking();
 	}
