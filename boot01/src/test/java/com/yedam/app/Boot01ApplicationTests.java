@@ -43,15 +43,6 @@ class Boot01ApplicationTests {
 		evo.setEmpname("sangnamja");
 		evo.setDeptid(40);
 		evo.setSal(1001);
-
-
-		
-		
-		
-		
-		
-		
-		
 		
 		int insert = empMapper.insertEmpInfo(evo);
 		//assertTrue(insert>0);
