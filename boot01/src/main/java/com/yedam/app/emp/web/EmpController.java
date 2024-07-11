@@ -63,7 +63,7 @@ public class EmpController {
 	// 수정 - 페이지
 	@GetMapping("empUpdate")
 	public String empUpdateForm(EmpVO empVO) {
-		return "";
+		return "emp/update";
 	}
 	// 수정 - 처리(연산, AJAX, => QueryString)
 
