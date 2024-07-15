@@ -1,5 +1,11 @@
 package com.yedam.app;
 
+
+
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -69,17 +75,17 @@ class Boot01ApplicationTests {
 	@Autowired
 	DepartmentsMapper deptMapper;
 	
-//	@Test
-//	void contextLoads() {
-//		assertNotNull(deptMapper);
-//	}
-//	@Test
-//	void selectDepartmetnsAll() {
-//	List<DepartmentsVO> list = deptMapper.selectDepartmetnsAll();
-//	for(DepartmentsVO dept : list){
-//		System.out.println(dept);
-//		}
-//	}
+	@Test
+	void contextLoads() {
+		assertNotNull(deptMapper);
+	}
+	@Test
+	void selectDepartmetnsAll() {
+	List<DepartmentsVO> list = deptMapper.selectDepartmetnsAll();
+	for(DepartmentsVO dept : list){
+		System.out.println(dept);
+		}
+	}
 //	@Test
 //	void selectDeptInfo() {
 //		DepartmentsVO dvo = new DepartmentsVO();

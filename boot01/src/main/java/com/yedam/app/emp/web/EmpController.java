@@ -1,12 +1,16 @@
 package com.yedam.app.emp.web;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.yedam.app.emp.service.EmpService;
 import com.yedam.app.emp.service.EmpVO;
@@ -62,13 +66,32 @@ public class EmpController {
 	}
 	// 수정 - 페이지
 	@GetMapping("empUpdate")
-	public String empUpdateForm(EmpVO empVO) {
+	public String empUpdateForm(@RequestParam Integer empid,
+								Model model) {
+		EmpVO empVO = new EmpVO();
+		empVO.setEmpid(empid);
+		
+		EmpVO findVO = empService.empInfo(empVO);
+		model.addAttribute("empIndf",findVO);
+		
 		return "emp/update";
 	}
 	// 수정 - 처리(연산, AJAX, => QueryString)
-
-	// 수정 - 처리(연산, AJAX, => JSON)
-
+	@PostMapping("empUpdate")
+	@ResponseBody // => AJAX 
+	public Map<String, Object> empUpdateAJAXQueryString(EmpVO empVO){
+		return empService.empUpdate(empVO);
+	}
+	// 수정 - 처리(연산, AJAX, => JSON : @RequestBody)
+	//@PostMapping("empUpdate")
+	@ResponseBody // => AJAX 
+	public Map<String, Object> empUpdateAJAXJSON(@RequestBody EmpVO empVO){
+		return empService.empUpdate(empVO);
+	}
 	// 삭제 - 처리
-
+	@GetMapping("empDelete")
+	public String empDelete(EmpVO empVO) {
+		empService.empDelete(empVO);
+		return "redirect:empList";
+	}
 }
