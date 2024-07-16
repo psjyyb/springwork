@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org/"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{common/layouts/default_layout}"
+      layout:fragment="Content">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h3>사원 등록 페이지</h3>
+	<form th:action="@{/empInsert}" method="post" name="insertForm">
+		<div>
+			<div>
+				<label>이름</label>
+				<input type="text" name="empname">
+			</div>
+			<div>
+				<label>상사번호</label>
+				<input type="number" name="mgr">
+			</div>
+			<div>
+				<label>급여</label>
+				<input type="number" name="sal">
+			</div>
+			<div>
+				<label>부서번호</label>
+				<input type="number" name="deptid">
+			</div>
+			<div>
+				<label>입사일자</label>
+				<input type="date" name="hiredate">
+			</div>
+			<div>
+				<button type="submit" class="btn btn-info">등록</button>
+				<button type="button" class="btn btn-success" th:onclick="|location.href='@{/empList}'|">목록</button>
+			</div>
+		</div>
+	</form>
+	<script>
+		//document.querySelect('form[name="insertForm"]');
+		insertForm.addEventListener('submit',function(){
+			event.preventDefault();
+			
+			let ename = document.querySelector('input[name="empname"]');
+			if(ename.value==''){
+				alert('이름은 필수입니다');
+				ename.focus();
+				return;
+			}
+			let emgr = document.querySelector('input[name="mgr"]');
+			if(emgr.value==''){
+				alert('상사번호는 필수입니다');
+				emgr.focus();
+				return;
+			}
+			let esal = document.querySelector('input[name="sal"]');
+			if(esal.value==''){
+				esal.value='';
+				alert('급여는 필수입니다');
+				esal.focus();
+				return;
+			}else if(esal.value<1000||esal.value>99999){
+				alert('급여 범위는 1000 부터 99999 까지 입니다');
+				esal.focus();
+				return;
+			}
+			insertForm.submit();
+		})
+		//$('insertForm').on('submit',function(){});
+	</script>
+</body>
+</html>

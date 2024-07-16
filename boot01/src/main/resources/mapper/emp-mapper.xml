@@ -70,8 +70,7 @@
 	<update id="updateEmpInfo">
 		UPDATE emp 
 		SET
-		empname = #{e
-		mp.empname}
+		empname = #{emp.empname}
 		,sal = #{emp.sal}
 		,mgr = #{emp.mgr}
 		,deptid = #{emp.deptid}

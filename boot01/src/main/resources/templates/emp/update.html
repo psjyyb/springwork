@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org/">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h3>사원 정보 수정</h3>
+	<form name="updateForm" th:object="${empInfo}">
+		<div>
+			<div>
+				<label>사원번호</label> <input type="text" th:field="*{empid}" readonly />
+			</div>
+			<div>
+				<label>이름</label> <input type="text" th:field="*{empname}" />
+			</div>
+			<div>
+				<label>상사번호</label> <input type="number" th:field="*{mgr}">
+			</div>
+			<div>
+				<label>급여</label> <input type="number" th:field="*{sal}">
+			</div>
+			<div>
+				<label>부서번호</label> <input type="number" th:field="*{deptid}">
+			</div>
+			<div>
+				<label>입사일자</label> <input type="date" th:field="*{hiredate}">
+			</div>
+			<div>
+				<button type="button" class="btn btn-info" id="updateBtn">저장</button>
+				<button type="button" class="btn btn-success"
+					th:onclick="|location.href='@{/empList}'|">목록</button>
+			</div>
+		</div>
+	</form>
+	<script>
+	 $('#updateBtn').on('click',updateAjax);
+	 
+	 function updateAjax(event){
+		 // 1) 유효성 체크
+		 if(validationCheck() == false) return;
+		 // 2) 서버에 보낼 데이터 정리
+		 let dataObj = getEmpObj();
+		 console.log(dataObj)
+		 // 3) AJAX @ResponseBody
+		 $.ajax('empUpdate',{
+			type:'post', // 통신할 때 method : get, post, put, delete
+			//data :  dataObj  // 커맨드 객체,@RequestParam,queryString 방식, data 는 기본 객체 타입, 자동으로 QueryString 변환
+			contentType:'application/json',
+			data : JSON.stringify(dataObj)  // @RequsetBody 방식
+		})
+		 .done( result=>{
+			 console.log(result);
+			 alert('수정완료');
+		 })
+		.fail(err=>{
+			console.log(err),
+			alert('수정실패');
+		});
+		// fetch('empUpdate', {  ajax 가 아닌 fetch 방식으로 서버에 요청
+		// 	method : 'post',
+		// 	// => 커맨드 객체, @RequestParam
+		// 	body : new URLSearchParams(dataObj) // 아작업이 반드시 필요하다
+		// 	// => @RequestBody
+		// 	headers : {
+		// 		'content-type' : 'application/json'
+		// 	},
+		// 	body : JSON.stringify(dataObj)
+		// })
+		// .then(response => response.json())   // 첫번째 .then 에서 json 으로 파싱
+		// .then(result => {					// .then 을 두번 사용해야함
+		// 		console.log(result);
+		// })
+		// .error(err => console.log(err));
+	 }
+	 
+	 function validationCheck(){
+		 let ename = $('[name="empname"]');
+		 if(ename.val()==''){
+			 alert('이름은 edam필수 값입니다.');
+			 ename.focus();
+			 return false;
+		 }
+		 let sal = $('[name="sal"]');
+			 if(sal.val() < 1000 || sal.val() > 99999){
+				 alert('급여의 범위는 1,000 ~ 99,999 입니다.');
+				 sal.focus();
+				 return false;
+			 }
+			 return true;
+		 
+	 }
+	 
+	 function getEmpObj(){
+		 let formAry = $('form[name="updateForm"]').serializeArray();
+		 let formObj = {};
+		 $.each(formAry,function(idx,input){
+			// input = {name:'empid',vlaue:'209'}
+			formObj[input.name] = input.value;
+			// formObj['empid'] = '209';
+			
+		 });
+		 return formObj;
+		}
+	</script>
+</body>
+</html>
