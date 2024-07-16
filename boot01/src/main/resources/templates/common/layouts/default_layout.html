@@ -1,7 +1,10 @@
-<!DOCTYPE html> <!-- default_layout.html -->
+<!DOCTYPE html>
+<!-- default_layout.html -->
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
+  
+
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <!--/* common/configs/default_config => viewResolver가 읽는 정보 */-->
@@ -10,11 +13,20 @@
 <th:block th:replace="common/configs/default_config :: jQueryConfig"></th:block>
 </head>
 <body>
-   <header>
-      <th:block th:insert="common/fragments/header :: headerFragment"></th:block>
-   </header>
-   <main>
-      <th:block layout:fragment="Content"></th:block>
-   </main>
+	<header>
+		<th:block th:insert="common/fragments/header :: headerFragment"></th:block>
+	</header>
+<body id="page-top">
+	<!-- Page Wrapper -->
+	<div id="wrapper">
+	<!--/* <th:block th:insert="common/fragments/sidebar :: sideFragment"></th:block>
+	 */-->
+		<th:block layout:fragment="Content"></th:block>
+	</div>
 </body>
+<footer class="sticky-footer bg-white">
+<th:block th:insert="common/fragments/footer :: footerFragment"></th:block>
+</footer>
+
+
 </html>

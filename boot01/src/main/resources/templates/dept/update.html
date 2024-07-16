@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org/" 
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{common/layouts/default_layout}"
+      layout:fragment="Content">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h3>부서 정보 수정</h3>
+	<form name="updateForm" th:object="${deptInfo}">
+		<div>
+			<div>
+				<label>부서번호</label> <input type="text" th:field="*{departmentId}" readonly />
+			</div>
+			<div>
+				<label>부서명</label> <input type="text" th:field="*{departmentName}" />
+			</div>
+			<div>
+				<label>부장번호</label> <input type="number" th:field="*{managerId}">
+			</div>
+			<div>
+				<label>지역번호</label> <input type="number" th:field="*{locationId}">
+			</div>
+			<div>
+				<button type="button" class="btn btn-info" id="updateBtn">저장</button>
+				<button type="button" class="btn btn-success"
+					th:onclick="|location.href='@{/deptList}'|">목록</button>
+			</div>
+		</div>
+	</form>
+    <script>
+        $('#updateBtn').on('click',updateAjax);
+        function updateAjax(){
+            // 유효성 체크
+            if(validationCheck() == false) return;
+            // 데이터 정리
+            let dataObj = getEmpObj();
+            console.log(dataObj);
+            // AJAX 요청
+            $.ajax('deptUpdate',{
+                type:'post',
+                contentType:'application/json',
+                data:JSON.stringify(dataObj)
+            })
+            .done(result=>{
+                console.log(result);
+                alert('수정완료@@@');
+            })
+            .fail(err=>{
+                console.log(err);
+                alert('수정실패@@');
+            })
+        }
+        function validationCheck(){
+            let dname = $('[name=departmentName]');
+            if(dname.val()==''){
+                alert('부서명을 필수 입력 정보입니다');
+                dname.focus();
+                return false;
+            }
+            let mid = $('[name=managerId]');
+            if(mid.val()==''){
+                alert('부서명을 필수 입력 정보입니다');
+                mid.focus();
+                return false;
+            }
+            let lid = $('[name=locationId]');
+            if(lid.val()==''){
+                alert('지역번호는 필수 입력 정보입니다');
+                lid.focus();
+                return false;
+            }
+           return true;
+        }
+        function getEmpObj(){
+            let formAry = $('form[name="updateForm"]').serializeArray();
+            let formObj = {};
+            $.each(formAry, (idx,input)=>{
+                formObj[input.name] = input.value;
+            });
+            return formObj;
+            
+        }
+    </script>
+</body>
+</html>

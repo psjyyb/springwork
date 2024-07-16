@@ -42,7 +42,7 @@ public class DepartmentsServiceImpl implements DepartmentsService{
 		if(result == 1) {
 			isSuccessed = true;
 		}
-		map.put("result", result);
+		map.put("result", isSuccessed);
 		map.put("target",deptVO);
 		return map;
 	}

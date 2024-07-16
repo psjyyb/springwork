@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-<html xmlns:th="https://www.thymeleaf.org/">
+<html xmlns:th="https://www.thymeleaf.org/" 
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{common/layouts/default_layout}"
+      layout:fragment="Content">
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -41,7 +44,7 @@
 		 if(validationCheck() == false) return;
 		 // 2) 서버에 보낼 데이터 정리
 		 let dataObj = getEmpObj();
-		 console.log(dataObj)
+		 console.log(dataObj);
 		 // 3) AJAX @ResponseBody
 		 $.ajax('empUpdate',{
 			type:'post', // 통신할 때 method : get, post, put, delete

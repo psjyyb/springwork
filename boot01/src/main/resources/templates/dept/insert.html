@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org/" 
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{common/layouts/default_layout}"
+      layout:fragment="Content">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+    <h3>부서등록화면</h3>
+    <form th:action="@{/deptInsert}" method="post" name="insertForm">
+		<div>
+			<div>
+				<label>부서명</label>
+				<input type="text" name="departmentName">
+			</div>
+			<div>
+				<label>부장번호</label>
+				<input type="number" name="managerId">
+			</div>
+			<div>
+				<label>지역번호</label>
+				<input type="number" name="locationId">
+			</div>
+			<div>
+				<button type="submit" class="btn btn-info">등록</button>
+				<button type="button" class="btn btn-success" th:onclick="|location.href='@{/deptList}'|">목록</button>
+			</div>
+		</div>
+	</form>
+    <script>
+        $('[name="insertForm"]').on('submit',function(event){
+                event.preventDefault();
+            let dname = $('input[name=departmentName]');
+            if(dname.val()==''){
+                alert('부서명은 필수 입력 정보입니다.');
+                dname.focus();
+                return;
+            }
+            let mid = $('input[name=managerId]');
+            if(mid.val()==''){
+                alert('부장번호는 필수 입력 정보입니다.');
+                mid.focus();
+                return;
+            }
+            let lid = $('input[name=locationId]');
+            console.log(lid.val());
+            if(lid.val()==''){
+                alert('지역번호는 필수 입력 정보입니다.');
+                lid.focus();
+                return;
+            }
+            insertForm.submit();
+            })
+    </script>
+</body>
+</html>
