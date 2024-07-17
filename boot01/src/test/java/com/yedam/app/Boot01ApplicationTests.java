@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import com.yedam.app.aaa.service.AaaService;
 import com.yedam.app.departments.mapper.DepartmentsMapper;
 import com.yedam.app.departments.service.DepartmentsVO;
 import com.yedam.app.emp.mapper.EmpMapper;
@@ -72,20 +73,20 @@ class Boot01ApplicationTests {
 //		assertTrue(result>0);
 //	}
 	
-	@Autowired
-	DepartmentsMapper deptMapper;
-	
-	@Test
-	void contextLoads() {
-		assertNotNull(deptMapper);
-	}
-	@Test
-	void selectDepartmetnsAll() {
-	List<DepartmentsVO> list = deptMapper.selectDepartmetnsAll();
-	for(DepartmentsVO dept : list){
-		System.out.println(dept);
-		}
-	}
+//	@Autowired
+//	DepartmentsMapper deptMapper;
+//	
+//	@Test
+//	void contextLoads() {
+//		assertNotNull(deptMapper);
+//	}
+//	@Test
+//	void selectDepartmetnsAll() {
+//	List<DepartmentsVO> list = deptMapper.selectDepartmetnsAll();
+//	for(DepartmentsVO dept : list){
+//		System.out.println(dept);
+//		}
+//	}
 //	@Test
 //	void selectDeptInfo() {
 //		DepartmentsVO dvo = new DepartmentsVO();
@@ -117,4 +118,12 @@ class Boot01ApplicationTests {
 //		int result = deptMapper.deleteDept(271);
 //		System.out.println(result+"삭제");
 //	}
+	
+	@Autowired
+	AaaService aaaService;
+	
+	@Test
+	public void transactional() {
+		aaaService.insert();
+	}
 }

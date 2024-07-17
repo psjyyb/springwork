@@ -69,13 +69,15 @@
 	<!-- 수정 -->
 	<update id="updateEmpInfo">
 		UPDATE emp 
-		SET
-		empname = #{emp.empname}
-		,sal = #{emp.sal}
-		,mgr = #{emp.mgr}
-		,deptid = #{emp.deptid}
+		<set>
+			 sal = #{emp.sal}
+			,mgr = #{emp.mgr}
+			,deptid = #{emp.deptid}
+			<if test="emp.empname !=null and !emp.empname.equals('')">
+			,empname = #{emp.empname}
+			</if>
+		</set>
 		WHERE empid = #{id}
-		
 	</update>
 	<!-- 삭제 -->
 	<delete id="deleteEmpInfo" parameterType="int">
