@@ -18,7 +18,7 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 public class UploadController {
 	@Value("${file.upload.path}") // 실행되는 시점에 환경변수에 접근하여 값을 가져온다 (운영체제에 따라 바뀌는값을 알아서 찾아 넣어준다)
-	private String uploadPath ;
+	private String uploadPath ; // 위에 벨류 값에 이름과 같아서 해당 필드를 찾아서 값을 넣어준다..?
 
 	@GetMapping("formUpload")
 	public void formUploadPage() {
