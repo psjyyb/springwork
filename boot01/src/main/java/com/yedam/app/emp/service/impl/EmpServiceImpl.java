@@ -14,9 +14,12 @@ import com.yedam.app.emp.service.EmpVO;
 @Service // AOP가 적용될 유일한 Bean
 public class EmpServiceImpl implements EmpService {
 
-	@Autowired // 필드 주입방식
-	EmpMapper empMapper;
+	private EmpMapper empMapper;
 
+	@Autowired
+	public EmpServiceImpl(EmpMapper empMapper) {
+		this.empMapper=empMapper;
+	}
 	// 전체 사원정보 조회
 	@Override
 	public List<EmpVO> empList() {

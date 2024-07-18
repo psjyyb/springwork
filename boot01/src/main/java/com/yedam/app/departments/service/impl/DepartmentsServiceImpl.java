@@ -14,8 +14,12 @@ import com.yedam.app.departments.service.DepartmentsVO;
 @Service
 public class DepartmentsServiceImpl implements DepartmentsService{
 	
+	private DepartmentsMapper deptMapper;
+
 	@Autowired
-	DepartmentsMapper deptMapper;
+	public DepartmentsServiceImpl(DepartmentsMapper deptMapper) {
+		this.deptMapper=deptMapper;
+	}
 	
 	@Override
 	public List<DepartmentsVO> deptList() {
