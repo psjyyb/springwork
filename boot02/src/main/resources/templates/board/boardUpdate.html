@@ -1,7 +1,9 @@
 <!DOCTYPE html>
-<html xmlns:th="https://www.thymeleaf.org/">
+<html xmlns:th="https://www.thymeleaf.org/"
+	   xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	   layout:decorate="~{common/layouts/default_layout}"
+	   layout:fragment="content">
 <head>
-<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
@@ -16,12 +18,15 @@
 			<label>글제목</label> <input type="text" th:field="*{boardTitle}">
 		</div>
 		<div>
+			<label>글쓴이</label> <input type="text" th:field="*{boardWriter}"
+				readonly>
+		</div>
+		<div>
 			<label>글내용</label>
 			<textarea th:field="*{boardContent}"></textarea>
 		</div>
 		<div>
-			<label>글쓴이</label> <input type="text" th:field="*{boardWriter}"
-				readonly>
+			<label>이미지</label><img th:src="@{/images/{fileName}(fileName=${board.image})}" alt="이미지" style="width:100px; height:100px">
 		</div>
 		<div>
 			<label>작성일</label> <input type="date" th:field="*{regdate}" readonly>
@@ -33,17 +38,30 @@
 		</div>
 	</form>
 <script>
-	$('#updateBtn').on('click',updateFunc)
+	$('#updateBtn').on('click',updateFunc);
 	
 	function updateFunc(event){
 		// 1.유효성 검사
 		 if(validationCheck() == false) return;
 		// 2.서버에 요청할 데이터 가져오기
-		let get = getData();
+		let info = getBoardInfo();
+		
 		//console.log(get);
 		// 3. ajax 이용하여 서버에 요청
-		//console.log($('[name="updateForm"]').serializeArray());
-	}
+		$.ajax('boardUpdate',{
+			type:'post',
+			contentType : 'application/json',
+			data : JSON.stringify(info)
+		})
+		.done(data => {
+			if(data.result){
+				alert('정상적으로 수정되었습니다.');
+			}else{
+				alert('수정되지 않았습니다.\n데이터를 확인해주세요.');
+			}
+		})
+		.fail(err => console.log(err));			
+	};
 	
 	function validationCheck(){
 		let btitle = $('[name="boardTitle"]');
@@ -60,9 +78,19 @@
 		}
 		return true;
 	}
-	function getData(){
-		console.log( $('[name="updateForm"]').serializeArray())
-	}
+	function getBoardInfo(){
+		let formData= $('form[name="updateForm"]').serializeArray();
+		console.log('1) serializeArray', formData);
+		
+		let objData = {};
+		$.each(formData, (idx, input) => {
+			console.log('2) input', idx, input);
+			objData[input.name] = input.value;
+		});
+		
+		console.log('3) objData', objData);
+		return objData;
+	};
 </script>
 </body>
 </html>

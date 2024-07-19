@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{common/layouts/default_layout}"
+      layout:fragment="Content">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h3>도서목록</h3>
+	<table class="table table-success table-striped">
+		<thead>
+			<tr>
+				<th style="text-align:center;">도서번호</th>
+				<th style="text-align:center;">도서명</th>
+				<th style="text-align:center;">표지</th>
+				<th style="text-align:center;">출판일자</th>
+				<th style="text-align:center;">금액</th>
+				<th style="text-align:center;">출판사</th>
+				<th style="text-align:center;">도서소개</th>
+			</tr>
+		</thead>
+		<tbody>
+			<th:block th:each="book :${books}">
+				<tr>
+					<td style="text-align:center;" th:text="${book.bookNo}"></td>
+					<td style="text-align:left;" th:text="${book.bookName}"></td>
+					<td style="text-align:center;"><img th:src="@{/images/{fileName}(fileName=${book.bookCoverimg})}" alt="이미지" style="width:100px; height:100px"></td>
+					<td style="text-align:center;" th:text="${#dates.format(book.bookDate,'yyyy-MM-dd')}"></td>
+					<td style="text-align:right;" th:text="${#numbers.formatInteger(book.bookPrice, 3, 'COMMA')}"></td>
+					<td style="text-align:left;" th:text="${book.bookPublisher}"></td>
+					<td style="text-align:left;" th:text="${book.bookInfo}"></td>
+				</tr>
+			</th:block>
+		</tbody>
+	</table>
+</body>
+</html>

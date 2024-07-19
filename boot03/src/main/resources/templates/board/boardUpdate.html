@@ -1,8 +1,14 @@
 <!DOCTYPE html>
 <html xmlns:th="https://www.thymeleaf.org/">
 <head>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+	crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.7.1.js"
+	integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+	crossorigin="anonymous"></script>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
@@ -11,7 +17,8 @@
 	<form name="updateForm" th:object="${boardInfo}">
 		<div>
 			<div>
-				<label>글번호</label> <input type="number" th:field="*{boardNo}" readonly />
+				<label>글번호</label> <input type="number" th:field="*{boardNo}"
+					readonly />
 			</div>
 			<div>
 				<label>글제목</label> <input type="text" th:field="*{boardTitle}" />
@@ -24,11 +31,13 @@
 				<label>글쓴이</label> <input type="text" th:field="*{boardWriter}">
 			</div>
 			<div>
-				<label>작성일</label> <input type="date" th:value="*{#dates.format(regdate,'yyyy-MM-dd')}" readonly>
+				<label>작성일</label> <input type="date"
+					th:value="*{#dates.format(regdate,'yyyy-MM-dd')}" readonly>
 			</div>
 			<div>
-				<img th:src="@{'/images/' + ${boardInfo.image}}" alt="이미지" style="width:100px; height:100px">
-				<input type="file" name="images">
+				<img th:src="@{'/images/' + ${boardInfo.image}}" alt="이미지"
+					style="width: 100px; height: 100px"> <input type="file"
+					name="images">
 			</div>
 			<div>
 				<button type="button" class="btn btn-info" id="updateBtn">저장</button>
@@ -37,19 +46,25 @@
 			</div>
 		</div>
 	</form>
-<script>
+	<script>
 	$('#updateBtn').on('click',updateAjax);
 	function updateAjax(){
 		// 1.유효성 체크
 		 if(validationCheck() == false) return;
 		// 2.요청할 데이터 정리
-		let dataObj = getBoard();
-		console.log(dataObj);
-		// 3. $.ajax로 호출
+			let dataObj = getBoard();
+		   	let form = $('form[name="updateForm"]')[0]
+		    let formData = new FormData(form);
+		   	let image = $('input[name="images"]');
+		   	console.log(image);
+		    formData.append("board", new Blob([JSON.stringify(dataObj)], {type: "application/json"}));
+		    formData.append("images", image)
+		    // 3. $.ajax로 호출
 		$.ajax('boardUpdate',{
 			type:'post',
-			contentType:'application/json',
-			data:JSON.stringify(dataObj)
+			data:dataObj,        // data 속성의 값(객체 타입)을
+		    processData : false, // QueryString으로 변환하는 설정
+		    contentType : false  // 기본 contentType을 사용하지 않겠다고 설정
 		})
 		.done(result=>{
 			console.log(result);

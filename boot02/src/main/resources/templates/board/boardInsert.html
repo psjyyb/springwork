@@ -1,10 +1,70 @@
 <!DOCTYPE html>
-<html xmlns:th="https://www.thymeleaf.org/">
+<html xmlns:th="https://www.thymeleaf.org/"
+	   xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	   layout:decorate="~{common/layouts/default_layout}"
+	   layout:fragment="content">
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
 	<h3>게시글 등록</h3>
+	<form th:action="@{/boardInsert}" method="post" name="insertForm"
+			enctype="multipart/form-data">
+		<div>
+		<table>
+			<tr>
+				<th style="text-align:center;">제목</th>
+				<td><input type="text" name="boardTitle"></td>
+			</tr>
+			<tr>
+				<th style="text-align:center;">내용</th>
+				<td><textarea name="boardContent"></textarea></td>
+			</tr>
+			<tr>
+				<th style="text-align:center;">작성자</th>
+				<td><input type="text" name="boardWriter"></td>
+			</tr>
+			<tr>
+				<th style="text-align:center;">작성일</th>
+				<td><input type="date" name="regdate"></td>
+			</tr>
+			<tr>
+				<th style="text-align:center;">이미지</th>
+				<td><input type="file" name="images"></td>
+			</tr>
+			<tr>
+				<td><button type="submit" class="btn btn-info">등록</button></td>
+				<td><button type="button" class="btn btn-success" th:onclick="|location.href='@{/boardList}'|">목록</button></td>
+			</tr>
+			</table>
+		</div>
+	</form>
+<script>
+	$('form[name="insertForm"]').on('submit',booksInsertHandler)
+		event.preventDefault();
+		function booksInsertHandler(){
+		let title = $('input[name="boardTitle"]');
+		if(title.val()==''){
+			alert('제목 적어');
+			title.focus();
+			return;
+		}
+		let content = $('[name=boardContent]');
+		if(content.val()==''){
+			alert('내용 적어');
+			content.focus();
+			return;
+		}
+		let writer = $('input[name="boardWriter"]');
+		if(writer.val()==''){
+			alert('작성자 적어');
+			writer.focus();
+			return;
+		}
+		alert('게시글이 등록되었습니다.');
+		insertForm.submit();
+	}
+</script>
 </body>
 </html>

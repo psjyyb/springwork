@@ -91,8 +91,21 @@ public class BoardController {
 	// RETURN - 수정결과 데이터(Map)
 	@PostMapping("boardUpdate")
 	@ResponseBody
-	public Map<String, Object> boardUpdate(@RequestBody BoardVO boardVO, @RequestPart MultipartFile images) {
-		System.out.println(boardVO);
+	public Map<String, Object> boardUpdate(@RequestPart(value="board") BoardVO boardVO,@RequestPart(value="images") MultipartFile images) {
+		System.out.println(boardVO+"board");
+		System.out.println(images+"이미지");
+		String fileName = images.getOriginalFilename();
+		UUID uuid = UUID.randomUUID();
+		String uniqueFileName = uuid + "_" + fileName;
+		String saveName = uploadPath + File.separator + uniqueFileName;
+		Path savePath = Paths.get(saveName);
+		boardVO.setImage(uniqueFileName);
+		try {
+			images.transferTo(savePath);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	
 		return boardService.updateBoard(boardVO);
 	}
 
