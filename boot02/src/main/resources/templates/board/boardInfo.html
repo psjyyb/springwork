@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org/">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h3>게시글 상세</h3>
+	<div>
+		<div>
+			<label>글번호</label>
+			<input type="number" th:value="${board.boardNo}" readonly>
+		</div>
+		<div>
+			<label>글제목</label>
+			<input type="text" th:value="${board.boardTitle}" readonly>
+		</div>
+		<div>
+			<label>글내용</label>
+			<textarea th:text="${board.boardContent}"readonly></textarea>
+		</div>
+		<div>
+			<label>글쓴이</label>
+			<input type="text" th:value="${board.boardWriter}"readonly>
+		</div>
+		<div>
+			<label>작성일</label>
+			<input type="date" th:value="${#dates.format(board.regdate,'yyyy-MM-dd')}" readonly>
+		</div>
+		<div>
+			<button type="button" class="btn btn-info" th:onclick="|location.href='@{/boardUpdate(boardNo=${board.boardNo})}'|">수정</button>
+			<button type="button" class="btn btn-success" th:onclick="|location.href='@{/boardList}'|">목록</button>
+			<button type="button" class="btn btn-warning" th:onclick="|location.href='@{/boardDelete(boardNo=${board.boardNo})}'|">삭제</button>
+		</div>
+</body>
+</html>
