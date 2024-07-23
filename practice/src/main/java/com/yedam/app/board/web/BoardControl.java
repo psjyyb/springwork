@@ -26,4 +26,8 @@ public class BoardControl {
 		model.addAttribute("boardList",list);
 		return "board/boardMain";
 	}
+	@GetMapping("/boardInsert")
+	public String boardInsert(Model model,BoardVO boaraVO) {
+		return "board/boardInsert";
+	}
 }

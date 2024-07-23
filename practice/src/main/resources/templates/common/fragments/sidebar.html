@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="https://www.thymeleaf.org/"
-	  th:fragment="sideBarFragment">
+	th:fragment="sideBarFragment">
 <!-- Sidebar -->
 <ul
 	class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion"
@@ -22,9 +22,11 @@
 	<hr class="sidebar-divider my-0">
 
 	<!-- Nav Item - Dashboard -->
-	<li class="nav-item"><a class="nav-link" href="index.html"> <i
-			class="fas fa-fw fa-tachometer-alt"></i> <span>Dashboard</span></a></li>
-
+	<li class="nav-item"><a class="nav-link" th:href="@{/}"> <i
+			class="fas fa-fw fa-tachometer-alt"></i> <span>목록</span></a></li>
+	<!-- Nav Item - Dashboard -->
+	<li class="nav-item"><a class="nav-link" th:href="@{/boardInsert}"> <i
+			class="fas fa-fw fa-tachometer-alt"></i> <span>등록</span></a></li>
 	<!-- Divider -->
 	<hr class="sidebar-divider">
 
@@ -78,9 +80,9 @@
 			aria-labelledby="headingPages" data-parent="#accordionSidebar">
 			<div class="bg-white py-2 collapse-inner rounded">
 				<h6 class="collapse-header">Login Screens:</h6>
-				<a class="collapse-item" href="login.html">Login</a> <a
-					class="collapse-item" href="register.html">Register</a> <a
-					class="collapse-item" href="forgot-password.html">Forgot
+				<a class="collapse-item" href="#">Login</a> <a
+					class="collapse-item" href="#">Register</a> <a
+					class="collapse-item" href="#">Forgot
 					Password</a>
 				<div class="collapse-divider"></div>
 				<h6 class="collapse-header">Other Pages:</h6>

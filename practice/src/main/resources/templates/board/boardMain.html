@@ -6,235 +6,21 @@
 <head>
 <meta charset="UTF-8">
 <title>Home</title>
-<style>
-@charset "UTF-8";
+    <!-- Custom fonts for this template -->
+    <link
+        th:href="@{https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i}"
+        rel="stylesheet">
 
-table.dataTable {
-	clear: both;
-	margin-top: 6px !important;
-	margin-bottom: 6px !important;
-	max-width: none !important;
-	border-collapse: separate !important;
-	border-spacing: 0;
-}
+    <!-- Custom styles for this template -->
+    <link th:href="@{/css/sb-admin-2.min.css}" rel="stylesheet">
 
-table.dataTable td, table.dataTable th {
-	-webkit-box-sizing: content-box;
-	box-sizing: content-box;
-}
-
-table.dataTable td.dataTables_empty, table.dataTable th.dataTables_empty
-	{
-	text-align: center;
-}
-
-table.dataTable.nowrap th, table.dataTable.nowrap td {
-	white-space: nowrap;
-}
-
-div.dataTables_wrapper div.dataTables_length label {
-	font-weight: normal;
-	text-align: left;
-	white-space: nowrap;
-}
-
-div.dataTables_wrapper div.dataTables_length select {
-	width: auto;
-	display: inline-block;
-}
-
-div.dataTables_wrapper div.dataTables_filter {
-	text-align: right;
-}
-
-div.dataTables_wrapper div.dataTables_filter label {
-	font-weight: normal;
-	white-space: nowrap;
-	text-align: left;
-}
-
-div.dataTables_wrapper div.dataTables_filter input {
-	margin-left: 0.5em;
-	display: inline-block;
-	width: auto;
-}
-
-div.dataTables_wrapper div.dataTables_info {
-	padding-top: 0.85em;
-}
-
-div.dataTables_wrapper div.dataTables_paginate {
-	margin: 0;
-	white-space: nowrap;
-	text-align: right;
-}
-
-div.dataTables_wrapper div.dataTables_paginate ul.pagination {
-	margin: 2px 0;
-	white-space: nowrap;
-	justify-content: flex-end;
-}
-
-div.dataTables_wrapper div.dataTables_processing {
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	width: 200px;
-	margin-left: -100px;
-	margin-top: -26px;
-	text-align: center;
-	padding: 1em 0;
-}
-
-table.dataTable>thead>tr>th:active, table.dataTable>thead>tr>td:active {
-	outline: none;
-}
-
-table.dataTable>thead>tr>th:not(.sorting_disabled), table.dataTable>thead>tr>td:not(.sorting_disabled)
-	{
-	padding-right: 30px;
-}
-
-table.dataTable>thead .sorting, table.dataTable>thead .sorting_asc,
-	table.dataTable>thead .sorting_desc, table.dataTable>thead .sorting_asc_disabled,
-	table.dataTable>thead .sorting_desc_disabled {
-	cursor: pointer;
-	position: relative;
-}
-
-table.dataTable>thead .sorting:before, table.dataTable>thead .sorting:after,
-	table.dataTable>thead .sorting_asc:before, table.dataTable>thead .sorting_asc:after,
-	table.dataTable>thead .sorting_desc:before, table.dataTable>thead .sorting_desc:after,
-	table.dataTable>thead .sorting_asc_disabled:before, table.dataTable>thead .sorting_asc_disabled:after,
-	table.dataTable>thead .sorting_desc_disabled:before, table.dataTable>thead .sorting_desc_disabled:after
-	{
-	position: absolute;
-	bottom: 0.9em;
-	display: block;
-	opacity: 0.3;
-}
-
-table.dataTable>thead .sorting:before, table.dataTable>thead .sorting_asc:before,
-	table.dataTable>thead .sorting_desc:before, table.dataTable>thead .sorting_asc_disabled:before,
-	table.dataTable>thead .sorting_desc_disabled:before {
-	right: 1em;
-	content: "↑";
-}
-
-table.dataTable>thead .sorting:after, table.dataTable>thead .sorting_asc:after,
-	table.dataTable>thead .sorting_desc:after, table.dataTable>thead .sorting_asc_disabled:after,
-	table.dataTable>thead .sorting_desc_disabled:after {
-	right: 0.5em;
-	content: "↓";
-}
-
-table.dataTable>thead .sorting_asc:before, table.dataTable>thead .sorting_desc:after
-	{
-	opacity: 1;
-}
-
-table.dataTable>thead .sorting_asc_disabled:before, table.dataTable>thead .sorting_desc_disabled:after
-	{
-	opacity: 0;
-}
-
-div.dataTables_scrollHead table.dataTable {
-	margin-bottom: 0 !important;
-}
-
-div.dataTables_scrollBody table {
-	border-top: none;
-	margin-top: 0 !important;
-	margin-bottom: 0 !important;
-}
-
-div.dataTables_scrollBody table thead .sorting:before, div.dataTables_scrollBody table thead .sorting_asc:before,
-	div.dataTables_scrollBody table thead .sorting_desc:before, div.dataTables_scrollBody table thead .sorting:after,
-	div.dataTables_scrollBody table thead .sorting_asc:after, div.dataTables_scrollBody table thead .sorting_desc:after
-	{
-	display: none;
-}
-
-div.dataTables_scrollBody table tbody tr:first-child th, div.dataTables_scrollBody table tbody tr:first-child td
-	{
-	border-top: none;
-}
-
-div.dataTables_scrollFoot>.dataTables_scrollFootInner {
-	box-sizing: content-box;
-}
-
-div.dataTables_scrollFoot>.dataTables_scrollFootInner>table {
-	margin-top: 0 !important;
-	border-top: none;
-}
-
-@media screen and (max-width: 767px) {
-	div.dataTables_wrapper div.dataTables_length, div.dataTables_wrapper div.dataTables_filter,
-		div.dataTables_wrapper div.dataTables_info, div.dataTables_wrapper div.dataTables_paginate
-		{
-		text-align: center;
-	}
-	div.dataTables_wrapper div.dataTables_paginate ul.pagination {
-		justify-content: center !important;
-	}
-}
-
-table.dataTable.table-sm>thead>tr>th:not(.sorting_disabled) {
-	padding-right: 20px;
-}
-
-table.dataTable.table-sm .sorting:before, table.dataTable.table-sm .sorting_asc:before,
-	table.dataTable.table-sm .sorting_desc:before {
-	top: 5px;
-	right: 0.85em;
-}
-
-table.dataTable.table-sm .sorting:after, table.dataTable.table-sm .sorting_asc:after,
-	table.dataTable.table-sm .sorting_desc:after {
-	top: 5px;
-}
-
-table.table-bordered.dataTable {
-	border-right-width: 0;
-}
-
-table.table-bordered.dataTable th, table.table-bordered.dataTable td {
-	border-left-width: 0;
-}
-
-table.table-bordered.dataTable th:last-child, table.table-bordered.dataTable th:last-child,
-	table.table-bordered.dataTable td:last-child, table.table-bordered.dataTable td:last-child
-	{
-	border-right-width: 1px;
-}
-
-table.table-bordered.dataTable tbody th, table.table-bordered.dataTable tbody td
-	{
-	border-bottom-width: 0;
-}
-
-div.dataTables_scrollHead table.table-bordered {
-	border-bottom-width: 0;
-}
-
-div.table-responsive>div.dataTables_wrapper>div.row {
-	margin: 0;
-}
-
-div.table-responsive>div.dataTables_wrapper>div.row>div[class^=col-]:first-child
-	{
-	padding-left: 0;
-}
-
-div.table-responsive>div.dataTables_wrapper>div.row>div[class^=col-]:last-child
-	{
-	padding-right: 0;
-}
-</style>
+    <!-- Custom styles for this page -->
+    <link th:href="@{/vendor/datatables/dataTables.bootstrap4.min.css}" rel="stylesheet">
 </head>
 <body>
+	<!-- Begin Page Content -->
 	<div class="container-fluid">
+
 		<!-- Page Heading -->
 		<h1 class="h3 mb-2 text-gray-800">Tables</h1>
 		<p class="mb-4">
@@ -251,95 +37,46 @@ div.table-responsive>div.dataTables_wrapper>div.row>div[class^=col-]:last-child
 					Example</h6>
 			</div>
 			<div class="card-body">
-				<div class="table-responsive">
-					<div id="dataTable_wrapper"
-						class="dataTables_wrapper dt-bootstrap4">
-						<div class="row">
-							<div class="col-sm-12 col-md-6">
-								<div class="dataTables_length" id="dataTable_length">
-									<label>Show <select name="dataTable_length"
-										aria-controls="dataTable"
-										class="custom-select custom-select-sm form-control form-control-sm"><option
-												value="10">10</option>
-											<option value="25">25</option>
-											<option value="50">50</option>
-											<option value="100">100</option></select> entries
-									</label>
-								</div>
-							</div>
-							<div class="col-sm-12 col-md-6">
-								<div id="dataTable_filter" class="dataTables_filter">
-									<label>Search:<input type="search"
-										class="form-control form-control-sm" placeholder=""
-										aria-controls="dataTable"></label>
-								</div>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-sm-12">
-								<table class="table table-bordered" id="dataTable" width="100%"
-									cellspacing="0">
-									<thead>
-										<tr>
-											<th>게시글번호</th>
-											<th>제목</th>
-											<th>작성일</th>
-										</tr>
-									</thead>
-									<tbody>
-										<th:block th:each="board :${boardList}">
-											<tr>
-												<td th:text="${board.boardNo}"></td>
-												<td th:text="${board.boardTitle}">2011/04/25</td>
-												<td th:text="${board.boardContent}">$320,800</td>
-											</tr>
-										</th:block>
-									</tbody>
-								</table>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-sm-12 col-md-5">
-								<div class="dataTables_info" id="dataTable_info" role="status"
-									aria-live="polite">Showing 11 to 20 of 57 entries</div>
-							</div>
-							<div class="col-sm-12 col-md-7">
-								<div class="dataTables_paginate paging_simple_numbers"
-									id="dataTable_paginate">
-									<ul class="pagination">
-										<li class="paginate_button page-item previous"
-											id="dataTable_previous"><a href="#"
-											aria-controls="dataTable" data-dt-idx="0" tabindex="0"
-											class="page-link">Previous</a></li>
-										<li class="paginate_button page-item "><a href="#"
-											aria-controls="dataTable" data-dt-idx="1" tabindex="0"
-											class="page-link">1</a></li>
-										<li class="paginate_button page-item active"><a href="#"
-											aria-controls="dataTable" data-dt-idx="2" tabindex="0"
-											class="page-link">2</a></li>
-										<li class="paginate_button page-item "><a href="#"
-											aria-controls="dataTable" data-dt-idx="3" tabindex="0"
-											class="page-link">3</a></li>
-										<li class="paginate_button page-item "><a href="#"
-											aria-controls="dataTable" data-dt-idx="4" tabindex="0"
-											class="page-link">4</a></li>
-										<li class="paginate_button page-item "><a href="#"
-											aria-controls="dataTable" data-dt-idx="5" tabindex="0"
-											class="page-link">5</a></li>
-										<li class="paginate_button page-item "><a href="#"
-											aria-controls="dataTable" data-dt-idx="6" tabindex="0"
-											class="page-link">6</a></li>
-										<li class="paginate_button page-item next" id="dataTable_next"><a
-											href="#" aria-controls="dataTable" data-dt-idx="7"
-											tabindex="0" class="page-link">Next</a></li>
-									</ul>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
+				<div class="table-responsive"></div>
+				<table class="table table-bordered" id="dataTable" width="100%"
+						cellspacing="0">
+						<thead>
+							<tr>
+								<th>게시글번호</th>
+								<th>제목</th>
+								<th>작성일</th>
+							</tr>
+						</thead>
+						<tbody>
+							<th:block th:each="board :${boardList}">
+								<tr>
+									<td th:text="${board.boardNo}"></td>
+									<td th:text="${board.boardTitle}">2011/04/25</td>
+									<td th:text="${board.boardContent}">$320,800</td>
+								</tr>
+							</th:block>
+						</tbody>
+					</table>
 			</div>
 		</div>
+
 	</div>
+
+	<!-- Bootstrap core JavaScript-->
+	<script th:src="@{/vendor/jquery/jquery.min.js}"></script>
+	<script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+
+	<!-- Core plugin JavaScript-->
+	<script th:src="@{/vendor/jquery-easing/jquery.easing.min.js}"></script>
+
+	<!-- Custom scripts for all pages-->
+	<script th:src="@{/js/sb-admin-2.min.js}"></script>
+
+	<!-- Page level plugins -->
+	<script th:src="@{/vendor/datatables/jquery.dataTables.min.js}"></script>
+	<script th:src="@{/vendor/datatables/dataTables.bootstrap4.min.js}"></script>
+
+	<!-- Page level custom scripts -->
+	<script th:src="@{/js/demo/datatables-demo.js}"></script>
 </body>
 </html>

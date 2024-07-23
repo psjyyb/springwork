@@ -1,10 +1,143 @@
 <!DOCTYPE html>
-<html xmlns:th="https://www.thymeleaf.org/">
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{common/layouts/default_layout}"
+	layout:fragment="Content">
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>dkdkdk</h1>
+	<link
+		href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css"
+		rel="stylesheet">
+	<style>
+.form-container {
+	margin-top: 20px;
+}
+
+.form-header {
+	background-color: #f8f9fa;
+	padding: 10px;
+	border-bottom: 1px solid #dee2e6;
+}
+
+.form-body {
+	padding: 20px;
+	background-color: #ffffff;
+	border: 1px solid #dee2e6;
+}
+
+.form-footer {
+	background-color: #f8f9fa;
+	padding: 10px;
+	border-top: 1px solid #dee2e6;
+	text-align: right;
+}
+</style>
+</head>
+<body>
+	<div class="container form-container">
+		<div class="form-header">
+			<h5>게시글 입력</h5>
+		</div>
+		<form name="insertForm" class="form-body" method="post" th:action
+			enctype="multipart/form-data">
+			<div class="mb-3">
+				<label for="boardTitle" class="form-label">제목</label> <input
+					type="text" class="form-control" id="boardTitle" name="boardTitle"
+					required>
+			</div>
+			<div class="mb-3">
+				<label for="boardWriter" class="form-label">작성자</label> <input
+					type="text" class="form-control" id="boardWriter"
+					name="boardWriter" required>
+			</div>
+			<div class="mb-3" id="fileInputContainer">
+				<label for="files" class="form-label">첨부 파일</label>
+				<div class="input-group mt-2 file-input-wrapper">
+					<input type="file" class="form-control" name="uploadFiles[]">
+					<button type="button" class="btn btn-danger removeFile">X</button>
+				</div>
+			</div>
+			<div id="fileInputs"></div>
+			<button type="button" class="btn btn-success" id="addFile">첨부파일추가</button>
+			<div class="mb-3">
+				<label for="boardContent" class="form-label">내용</label>
+				<textarea class="form-control" id="boardContent" name="boardContent"
+					rows="5" required></textarea>
+			</div>
+			<div class="form-footer">
+				<button type="submit" class="btn btn-primary">등록</button>
+				<button type="button" class="btn btn-secondary">취소</button>
+			</div>
+		</form>
+		<!-- <form action="uploadForm" method="post" enctype="multipart/form-data">
+			<input type="file" name="images" multiple>
+			<button type="submit">저장</button>
+		</form> -->
+	</div>
+	<script>
+	$(document).ready(function() {
+	    var filesArray = [];
+
+	    // Function to create a new file input with a remove button
+	    function createFileInput() {
+	        var newFileInputWrapper = $('<div class="input-group mt-2 file-input-wrapper"></div>');
+	        var newFileInput = $('<input type="file" class="form-control" name="uploadFiles[]">');
+	        var removeButton = $('<button type="button" class="btn btn-danger removeFile">X</button>');
+	        
+	        // Update filesArray when a new file is selected
+	        newFileInput.change(function() {
+	            updateFilesArray();
+	        });
+
+	        // Remove file input and update the array
+	        removeButton.click(function() {
+	            newFileInputWrapper.remove();
+	            updateFilesArray();
+	        });
+
+	        newFileInputWrapper.append(newFileInput);
+	        newFileInputWrapper.append(removeButton);
+	        return newFileInputWrapper;
+	    }
+
+	    // Update the filesArray with currently selected files
+	    function updateFilesArray() {
+	        filesArray = [];
+	        $('#fileInputContainer input[type="file"]').each(function() {
+	            var inputFiles = $(this).prop('files');
+	            for (var i = 0; i < inputFiles.length; i++) {
+	                filesArray.push(inputFiles[i]);
+	                console.log('Current files array11111:', filesArray);
+	            }
+	        });
+	        console.log('Current files array:', filesArray); // For debugging
+	    }
+
+	    // Add a new file input when the button is clicked
+	    $('#addFile').click(function() {
+	        $('#fileInputs').append(createFileInput());
+	    });
+
+	    // Initial setup to handle changes and ensure the array is up-to-date
+	    $('#fileInputContainer').on('change', 'input[type="file"]', function() {
+	        updateFilesArray();
+	    });
+
+	    // Initial call to ensure files are captured from the beginning
+	    updateFilesArray();
+	});
+	</script>
+	<!-- Bootstrap core JavaScript-->
+	<script th:src="@{/vendor/jquery/jquery.min.js}"></script>
+	<script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+
+	<!-- Core plugin JavaScript-->
+	<script th:src="@{/vendor/jquery-easing/jquery.easing.min.js}"></script>
+
+	<!-- Custom scripts for all pages-->
+	<script th:src="@{/js/sb-admin-2.min.js}"></script>
 </body>
 </html>
