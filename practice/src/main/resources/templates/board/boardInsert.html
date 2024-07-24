@@ -53,14 +53,10 @@
 					type="text" class="form-control" id="boardWriter"
 					name="boardWriter" required>
 			</div>
-			<div class="mb-3" id="fileInputContainer">
-				<label for="files" class="form-label">첨부 파일</label>
-				<div class="input-group mt-2 file-input-wrapper">
-					<input type="file" class="form-control" name="uploadFiles[]">
-					<button type="button" class="btn btn-danger removeFile">X</button>
-				</div>
+			<div class="mb-3" id="fileInputs">
+			    <label for="files" class="form-label">첨부 파일</label>
+			    <input type="file" class="form-control" id="files" name="uploadFiles[]">
 			</div>
-			<div id="fileInputs"></div>
 			<button type="button" class="btn btn-success" id="addFile">첨부파일추가</button>
 			<div class="mb-3">
 				<label for="boardContent" class="form-label">내용</label>
@@ -79,55 +75,42 @@
 	</div>
 	<script>
 	$(document).ready(function() {
-	    var filesArray = [];
-
-	    // Function to create a new file input with a remove button
-	    function createFileInput() {
-	        var newFileInputWrapper = $('<div class="input-group mt-2 file-input-wrapper"></div>');
-	        var newFileInput = $('<input type="file" class="form-control" name="uploadFiles[]">');
-	        var removeButton = $('<button type="button" class="btn btn-danger removeFile">X</button>');
+			let formData = new FormData();
+			let fileArr = [];
+	    $('#addFile').click(function() {
+	        let newFileInputWrapper = $('<div class="input-group mt-2"></div>');
+	        let newFileInput = $('<input type="file" class="form-control" id="files" name="uploadFiles[]">');
+	        let removeButton = $('<button type="button" class="btn btn-danger">X</button>');
 	        
-	        // Update filesArray when a new file is selected
-	        newFileInput.change(function() {
-	            updateFilesArray();
-	        });
-
-	        // Remove file input and update the array
-	        removeButton.click(function() {
+	        removeButton.click(function(e) {
+	        	let inputElement = $(e.target).parent().children('input'); // 해당 input 요소를 선택
+	        	let fileToRemove = inputElement[0].files[0]; // input 요소에 추가된 파일
+	        	    // 파일 배열에서 해당 파일을 찾고 제거
+	        	filesArray = fileArr.filter(files => files !== fileToRemove);
 	            newFileInputWrapper.remove();
-	            updateFilesArray();
+	            //console.log(newFileInputWrapper.find('input').files);
+	            //console.log($(e.target).parent().children('iuput')); // 이거 삭제 누른 놈의 파일을 가져와야돼 그러고 그놈을 배열에서 삭제 시켜줘야돼
 	        });
 
 	        newFileInputWrapper.append(newFileInput);
 	        newFileInputWrapper.append(removeButton);
-	        return newFileInputWrapper;
-	    }
+	        $('#fileInputs').append(newFileInputWrapper);
+	        newFileInput.on('change',function(e){
+	        	//formData.append('files',e.currentTarget.files); 이걸 하나하나 따로 담아줘야할지 한번에 담은 배열을 담아줘야할지 생각해봐 밑에랑 같아
+	        	fileArr.push(e.currentTarget.files);
+	        	console.log('추가',fileArr);
+	        	//console.log('나ㅣ나나',e.currentTarget.files);
 
-	    // Update the filesArray with currently selected files
-	    function updateFilesArray() {
-	        filesArray = [];
-	        $('#fileInputContainer input[type="file"]').each(function() {
-	            var inputFiles = $(this).prop('files');
-	            for (var i = 0; i < inputFiles.length; i++) {
-	                filesArray.push(inputFiles[i]);
-	                console.log('Current files array11111:', filesArray);
-	            }
-	        });
-	        console.log('Current files array:', filesArray); // For debugging
-	    }
-
-	    // Add a new file input when the button is clicked
-	    $('#addFile').click(function() {
-	        $('#fileInputs').append(createFileInput());
+			});
+	        
 	    });
-
-	    // Initial setup to handle changes and ensure the array is up-to-date
-	    $('#fileInputContainer').on('change', 'input[type="file"]', function() {
-	        updateFilesArray();
-	    });
-
-	    // Initial call to ensure files are captured from the beginning
-	    updateFilesArray();
+	    $('#files').on('change',function(e){
+	    	//formData.append('files',e.currentTarget.files); 이걸 하나하나 따로 담아줘야할지 한번에 담은 배열을 담아줘야할지 생각해봐 위에랑 같아
+        	fileArr.push(e.currentTarget.files);
+        	console.log('원래',fileArr);
+			
+		});
+	    //formData.append('files',fileArr); 이렇게 배열 하나 선언해서 파일 다 담아둔 다음에 보내야하는지 ..  고민해봐
 	});
 	</script>
 	<!-- Bootstrap core JavaScript-->
