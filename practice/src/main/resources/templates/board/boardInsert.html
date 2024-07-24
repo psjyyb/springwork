@@ -55,7 +55,7 @@
 			</div>
 			<div class="mb-3" id="fileInputs">
 			    <label for="files" class="form-label">첨부 파일</label>
-			    <input type="file" class="form-control" id="files" name="uploadFiles[]">
+			    <input type="file" class="form-control" id="files" name="uploadFiles">
 			</div>
 			<button type="button" class="btn btn-success" id="addFile">첨부파일추가</button>
 			<div class="mb-3">
@@ -83,15 +83,17 @@
 	        let removeButton = $('<button type="button" class="btn btn-danger">X</button>');
 	        
 	        removeButton.click(function(e) {
-	        	let inputElement = $(e.target).parent().children('input'); // 해당 input 요소를 선택
-	        	let fileToRemove = inputElement[0].files[0]; // input 요소에 추가된 파일
-	        	    // 파일 배열에서 해당 파일을 찾고 제거
-	        	filesArray = fileArr.filter(files => files !== fileToRemove);
+	            let inputElement = $(e.target).parent().children('input'); // 해당 input 요소를 선택
+	            let fileToRemove = inputElement[0].files; // input 요소에 추가된 파일
+	            console.log('sadasd', fileToRemove);
+	            
+	            // 파일 배열에서 해당 파일을 찾고 제거
+	            fileArr = fileArr.filter(file => file !== fileToRemove);
+	            
+	            console.log('내가잘못보고있던건가',fileArr); // 필터링된 파일 배열을 콘솔에 출력하여 확인
 	            newFileInputWrapper.remove();
-	            //console.log(newFileInputWrapper.find('input').files);
-	            //console.log($(e.target).parent().children('iuput')); // 이거 삭제 누른 놈의 파일을 가져와야돼 그러고 그놈을 배열에서 삭제 시켜줘야돼
+	        
 	        });
-
 	        newFileInputWrapper.append(newFileInput);
 	        newFileInputWrapper.append(removeButton);
 	        $('#fileInputs').append(newFileInputWrapper);
