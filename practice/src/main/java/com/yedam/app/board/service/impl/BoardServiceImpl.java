@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.yedam.app.board.mapper.BoardMapper;
 import com.yedam.app.board.service.BoardService;
@@ -23,5 +24,15 @@ public class BoardServiceImpl implements BoardService{
 	public List<BoardVO> boardList() {
 		return boardMapper.selectBoardList();
 	}
-
+	@Override
+	public int boardInsert(BoardVO boardVO) {
+		return boardMapper.insertboard(boardVO);
+	}
+	@Override
+	public int fileInsert(BoardVO boardVO, MultipartFile[] files) {
+		System.out.println("boardVO :"+boardVO);
+		System.out.println("files : "+files);
+		
+		return boardMapper.insertFile(boardVO,files);
+	}
 }

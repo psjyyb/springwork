@@ -48,11 +48,6 @@
 					type="text" class="form-control" id="boardTitle" name="boardTitle"
 					required>
 			</div>
-			<div class="mb-3">
-				<label for="boardWriter" class="form-label">작성자</label> <input
-					type="text" class="form-control" id="boardWriter"
-					name="boardWriter" required>
-			</div>
 			<div class="mb-3" id="fileInputs">
 			    <label for="files" class="form-label">첨부 파일</label>
 			    <input type="file" class="form-control" id="files" name="uploadFiles">
@@ -64,7 +59,7 @@
 					rows="5" required></textarea>
 			</div>
 			<div class="form-footer">
-				<button type="submit" class="btn btn-primary">등록</button>
+				<button type="button" class="btn btn-primary" id="addBtn">등록</button>
 				<button type="button" class="btn btn-secondary">취소</button>
 			</div>
 		</form>
@@ -75,8 +70,22 @@
 	</div>
 	<script>
 	$(document).ready(function() {
-			let formData = new FormData();
-			let fileArr = [];
+		let formData = new FormData();
+		let fileArr = [];
+			$('#addBtn').on('click',function(){
+				let sendData = getData();
+				
+				$.ajax('/boardInsert',{
+					type : 'post',				
+					data : formData,     // data 속성의 값(객체 타입)을
+					processData : false, // QueryString으로 변환하는 설정
+					contentType : false  // 기본 contentType을 사용하지 않겠다고 설정
+				})
+				.done(result => {console.log(result),alert('등록완료!!');
+				})
+				.fail(err => console.log(err));
+				
+			})
 	    $('#addFile').click(function() {
 	        let newFileInputWrapper = $('<div class="input-group mt-2"></div>');
 	        let newFileInput = $('<input type="file" class="form-control" id="files" name="uploadFiles[]">');
@@ -85,12 +94,10 @@
 	        removeButton.click(function(e) {
 	            let inputElement = $(e.target).parent().children('input'); // 해당 input 요소를 선택
 	            let fileToRemove = inputElement[0].files; // input 요소에 추가된 파일
-	            console.log('sadasd', fileToRemove);
 	            
 	            // 파일 배열에서 해당 파일을 찾고 제거
 	            fileArr = fileArr.filter(file => file !== fileToRemove);
 	            
-	            console.log('내가잘못보고있던건가',fileArr); // 필터링된 파일 배열을 콘솔에 출력하여 확인
 	            newFileInputWrapper.remove();
 	        
 	        });
@@ -100,7 +107,6 @@
 	        newFileInput.on('change',function(e){
 	        	//formData.append('files',e.currentTarget.files); 이걸 하나하나 따로 담아줘야할지 한번에 담은 배열을 담아줘야할지 생각해봐 밑에랑 같아
 	        	fileArr.push(e.currentTarget.files);
-	        	console.log('추가',fileArr);
 	        	//console.log('나ㅣ나나',e.currentTarget.files);
 
 			});
@@ -109,10 +115,17 @@
 	    $('#files').on('change',function(e){
 	    	//formData.append('files',e.currentTarget.files); 이걸 하나하나 따로 담아줘야할지 한번에 담은 배열을 담아줘야할지 생각해봐 위에랑 같아
         	fileArr.push(e.currentTarget.files);
-        	console.log('원래',fileArr);
-			
 		});
-	    //formData.append('files',fileArr); 이렇게 배열 하나 선언해서 파일 다 담아둔 다음에 보내야하는지 ..  고민해봐
+	    
+	    function getData(){
+	    	formData.append('files',fileArr); //이렇게 배열 하나 선언해서 파일 다 담아둔 다음에 보내야하는지 ..  고민해봐
+	    	let title = $('#boardTitle').val();
+	    	let content = $('#boardContent').val();
+	    	formData.append('boardTitle',title);
+	    	formData.append('boardContent',content);
+	    	// 제목, 내용까지 가지고와서 append 해줬음 AJAX 호출해서 값넘기기하면된다
+	    }
+	    
 	});
 	</script>
 	<!-- Bootstrap core JavaScript-->
