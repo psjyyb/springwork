@@ -15,5 +15,5 @@ public interface BoardMapper {
 	int insertboard(BoardVO boardVO);
 	
 	// 사진 등록
-	int insertFile(BoardVO boardVo,MultipartFile[] files);
+	int insertFile(MultipartFile files);
 }
