@@ -8,4 +8,5 @@ public interface PaymentMapper {
 	List<PaymentVO> findBySubscriptionId(Long subscriptionId);
 
 	void insertPayment(PaymentVO payment);
+	int billingKeyInsert(String billingKey);
 }

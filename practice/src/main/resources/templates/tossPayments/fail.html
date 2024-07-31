@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{common/layouts/default_layout}"
+      layout:fragment="Content">
+<head>
+  <title>결제 실패</title>
+  <meta charset="utf-8" />
+</head>
+<body>
+  <h1>결제 실패</h1>
+  <p>오류 코드: <span th:text="${errorCode}"></span></p>
+  <p>오류 메시지: <span th:text="${errorMessage}"></span></p>
+  <a href="/payTest">다시 시도</a>
+</body>
+</html>

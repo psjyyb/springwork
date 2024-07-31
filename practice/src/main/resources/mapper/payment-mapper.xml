@@ -8,4 +8,9 @@
 	INSERT INTO Payments(subscription_id, amount, payment_date, status) 
             VALUES(#{subscriptionId}, #{amount}, #{paymentDate}, #{status})
 	</insert>
+	<update id="billingKeyInsert">
+		UPDATE payments
+		SET billingkey = #{billingkey}
+		WHERE id = 1
+	</update>
 </mapper>
