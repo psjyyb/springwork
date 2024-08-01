@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Signature Pad Example</title>
+    <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.0.0/dist/signature_pad.umd.min.js"></script>
+</head>
+<body>
+    <h1>전자 서명</h1>
+    <canvas id="signature-pad" width="400" height="200" style="border: 1px solid black;"></canvas>
+    <button id="save">서명 저장</button>
+    <img id="signature-image" alt="Signature Image" />
+
+    <form id="signature-form" method="post" th:action="@{/saveSignature}">
+        <input type="hidden" id="signature-data" name="signatureData"/>
+    </form>
+
+    <script>
+        var canvas = document.getElementById('signature-pad');
+        var signaturePad = new SignaturePad(canvas);
+
+        document.getElementById('save').addEventListener('click', function () {
+            var dataURL = signaturePad.toDataURL('image/png');
+            document.getElementById('signature-image').src = dataURL;
+            document.getElementById('signature-data').value = dataURL;
+            document.getElementById('signature-form').submit();
+        });
+    </script>
+</body>
+</html>

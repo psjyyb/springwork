@@ -16,6 +16,7 @@
 	<description>Exam project for Spring Boot</description>
 	<properties>
 		<java.version>11</java.version>
+		<org.springframework-version>5.3.9</org.springframework-version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -59,7 +60,20 @@
 			<version>2.3.2</version>
 			<scope>test</scope>
 		</dependency>
-
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>mail</artifactId>
+			<version>1.4.7</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-mail</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+			<version>${org.springframework-version}</version>
+		</dependency>
 		<!-- thymeleaf layout -->
 		<!--
 		https://mvnrepository.com/artifact/nz.net.ultraq.thymeleaf/thymeleaf-layout-dialect -->

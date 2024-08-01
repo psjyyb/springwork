@@ -61,7 +61,7 @@ public class PaymentServiceImpl implements PaymentService {
 	}
 	
 	
-	 @Scheduled(fixedDelay = 10000)
+	 //@Scheduled(fixedDelay = 10000)
 	    public void processScheduledBilling() {
 	        // 고객 키 및 빌링 키를 가져오는 로직이 필요합니다.
 	        // 여기서는 예시로 고정된 값을 사용하겠습니다.
