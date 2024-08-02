@@ -10,12 +10,16 @@ public interface EmpMapper {
 	// 테이블 기준
 	// 전체조회
 	public List<EmpVO> selectEmpAll();
+
 	// 단건조회
 	public EmpVO selectEmpInfo(EmpVO empVO);
+
 	// 등록
 	public int insertEmpInfo(EmpVO empVO);
+
 	// 수정
-	public int updateEmpInfo(@Param("id") int empId, @Param("emp")EmpVO empVO);
+	public int updateEmpInfo(@Param("id") int empId, @Param("emp") EmpVO empVO);
+
 	// 삭제
 	public int deleteEmpInfo(int empId);
 }

@@ -13,6 +13,6 @@ public class EmpVO {
 	private int mgr;
 	private double sal;
 	private Integer deptid;
-	@DateTimeFormat(pattern="yyyy-MM-dd")// 파라미터 자동변환
+	@DateTimeFormat(pattern = "yyyy-MM-dd") // 파라미터 자동변환
 	private Date hiredate;
 }

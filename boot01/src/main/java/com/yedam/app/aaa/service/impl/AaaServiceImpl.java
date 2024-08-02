@@ -8,11 +8,11 @@ import com.yedam.app.aaa.mapper.AaaMapper;
 import com.yedam.app.aaa.service.AaaService;
 
 @Service
-public class AaaServiceImpl implements AaaService{
+public class AaaServiceImpl implements AaaService {
 
 	@Autowired
 	AaaMapper aaaMapper;
-	
+
 	@Transactional
 	@Override
 	public void insert() {

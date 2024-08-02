@@ -34,55 +34,55 @@ public class ParamController {
 	// QueryString => @ResquestParam : 기본타입, 단일값 (String, Integer)
 	@RequestMapping(path = "reqparam", method = { RequestMethod.GET, RequestMethod.POST })
 	@ResponseBody
-	public String requestParam(
-			String empname, // 생략가능(값을 넘기지 않아도 된다)
+	public String requestParam(String empname, // 생략가능(값을 넘기지 않아도 된다)
 			@RequestParam Integer empid, // 필수(값을 필수적으로 넘겨야 된다)
 			@RequestParam(name = "message", defaultValue = "No message", required = true) String msg) {
-		String result = ""; 
+		String result = "";
 		result += "path : / reqparam\n";
 		result += "\t empid : " + empid;
 		result += "\t empname: " + empname;
 		result += "\t message: " + msg;
 		return result;
 	}
-	@RequestMapping(path={"path/{id}/{pwd}","path/{id}"})
+
+	@RequestMapping(path = { "path/{id}/{pwd}", "path/{id}" })
 	@ResponseBody
-	public String pathVariable(@PathVariable String id,
-								@PathVariable(name ="pwd",required=false)String password) {
+	public String pathVariable(@PathVariable String id, @PathVariable(name = "pwd", required = false) String password) {
 		// pathVariable 기본값 설정
-		if(password ==null) {
-			password="1111";
+		if (password == null) {
+			password = "1111";
 		}
-		String result = ""; 
+		String result = "";
 		result += "path : /path/{id}/{pwd}\n";
 		result += "\t id : " + id;
 		result += "\t password : " + password;
 		return result;
 	}
-	//@RequestBody : JSON 포맷, 배열 or 객체
+	// @RequestBody : JSON 포맷, 배열 or 객체
 	// Method : POST,PUT,
 	// Content-type : application/json
-	
+
 	@PostMapping("resbody")
 	@ResponseBody
 	public String requestBody(@RequestBody EmpVO empVO) {
-		String result = ""; 
+		String result = "";
 		result += "path : /resbody\n";
 		result += "\t empid : " + empVO.getEmpid();
 		result += "\t empname : " + empVO.getEmpname();
 		result += "\t hiredate : " + empVO.getHiredate();
 		return result;
 	}
+
 	@PostMapping("resbodyList")
 	@ResponseBody
-	public String requestBodyList (@RequestBody List<EmpVO> list) {
-		String result = ""; 
+	public String requestBodyList(@RequestBody List<EmpVO> list) {
+		String result = "";
 		result += "path : /resbodyList\n";
-		for(EmpVO empVO :list) {
-		result += "\t empid : " + empVO.getEmpid();
-		result += "\t empname : " + empVO.getEmpname();
-		result += "\t hiredate : " + empVO.getHiredate();
-		result +="\n";
+		for (EmpVO empVO : list) {
+			result += "\t empid : " + empVO.getEmpid();
+			result += "\t empname : " + empVO.getEmpname();
+			result += "\t hiredate : " + empVO.getHiredate();
+			result += "\n";
 		}
 		return result;
 	}

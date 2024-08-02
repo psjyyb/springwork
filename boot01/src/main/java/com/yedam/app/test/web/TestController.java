@@ -15,18 +15,21 @@ public class TestController {
 	public String userTest(String keyword) {
 		return "Server Response : " + keyword;
 	}
-	//@RequestMapping(path="/sample",method=RequestMethod.GET)
+
+	// @RequestMapping(path="/sample",method=RequestMethod.GET)
 	@GetMapping("sample")
 	@ResponseBody
 	public String urlGetTest(String keyword) {
 		return "Server Response :SELECT - " + keyword;
 	}
-	//@RequestMapping(path="/sample",method=RequestMethod.POST)
+
+	// @RequestMapping(path="/sample",method=RequestMethod.POST)
 	@PostMapping("sample")
 	@ResponseBody
 	public String urlPostTest(String keyword) {
 		return "Server Response :INSERT - " + keyword;
 	}
+
 	@GetMapping("param")
 	@ResponseBody
 	public EmpVO paramGetTest(EmpVO empVO) {

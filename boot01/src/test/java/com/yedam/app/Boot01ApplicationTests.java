@@ -1,7 +1,5 @@
 package com.yedam.app;
 
-
-
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.util.List;
@@ -17,10 +15,10 @@ import com.yedam.app.emp.mapper.EmpMapper;
 
 @SpringBootTest
 class Boot01ApplicationTests {
-	
+
 	@Autowired
 	EmpMapper empMapper;
-	
+
 //	@Test
 //	void contextLoads() {
 //		assertNotNull(empMapper);
@@ -51,7 +49,7 @@ class Boot01ApplicationTests {
 //		System.out.println(evo.getEmpid());
 //		assertEquals(evo.getEmpid(), 2);
 //	}
-	   //@Test
+	// @Test
 //	   void updateEmpInfo() {
 //	      //수정 1.단건조회 => 2.업데이트
 //	      //1-1) 조회 조건
@@ -72,7 +70,7 @@ class Boot01ApplicationTests {
 //		int result = empMapper.deleteEmpInfo(2);
 //		assertTrue(result>0);
 //	}
-	
+
 //	@Autowired
 //	DepartmentsMapper deptMapper;
 //	
@@ -118,10 +116,10 @@ class Boot01ApplicationTests {
 //		int result = deptMapper.deleteDept(271);
 //		System.out.println(result+"삭제");
 //	}
-	
+
 	@Autowired
 	AaaService aaaService;
-	
+
 	@Test
 	public void transactional() {
 		aaaService.insert();

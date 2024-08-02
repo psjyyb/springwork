@@ -67,7 +67,7 @@ public class BoardControl {
 		 return url;
 	        
 	    }
-	 @GetMapping("/sign")
+	 @GetMapping("/")
 	    public String showSignaturePage(Model model) {
 	        return "sign/sign";
 	    }
@@ -96,6 +96,6 @@ public class BoardControl {
 	        } catch (Exception e) {
 	            e.printStackTrace();
 	        }
-	        return "redirect:/";
+	        return "redirect:/boardList";
 	    }
 }

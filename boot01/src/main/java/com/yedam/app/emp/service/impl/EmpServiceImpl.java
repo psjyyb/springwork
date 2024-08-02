@@ -18,8 +18,9 @@ public class EmpServiceImpl implements EmpService {
 
 	@Autowired
 	public EmpServiceImpl(EmpMapper empMapper) {
-		this.empMapper=empMapper;
+		this.empMapper = empMapper;
 	}
+
 	// 전체 사원정보 조회
 	@Override
 	public List<EmpVO> empList() {
