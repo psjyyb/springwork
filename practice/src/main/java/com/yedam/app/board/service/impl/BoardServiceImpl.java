@@ -36,7 +36,6 @@ public class BoardServiceImpl implements BoardService{
 		MultipartFile[] files = boardVO.getFiles();
 		 if (files != null) {
 	            for (MultipartFile file : files) {
-	            	tResult +=fileInsert(file);
 	                System.out.println("File Name: " + file.getOriginalFilename());
 	            }
 	        } else {

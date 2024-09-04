@@ -1,20 +1,95 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{common/layouts/default_layout}"
-      layout:fragment="Content">
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{common/layouts/default_layout}"
+	layout:fragment="Content">
 <head>
-  <title>결제 성공</title>
-  <meta charset="utf-8" />
+<title>결제 성공</title>
+<meta charset="utf-8" />
+<style>
+.container {
+	max-width: 600px;
+	margin: 0 auto;
+	background: #fff;
+	border-radius: 8px;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	padding: 20px;
+}
+
+h1 {
+	color: #007bff;
+}
+
+.info {
+	margin: 20px 0;
+	text-align: left;
+}
+
+.info h2 {
+	margin-bottom: 10px;
+}
+
+.info p {
+	margin: 5px 0;
+}
+
+.button {
+	display: inline-block;
+	padding: 10px 20px;
+	font-size: 16px;
+	color: #fff;
+	background-color: #28a745;
+	border: none;
+	border-radius: 5px;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+.button:hover {
+	background-color: #218838;
+}
+
+.cancel-button {
+	display: inline-block;
+	padding: 10px 20px;
+	font-size: 16px;
+	color: #fff;
+	background-color: #dc3545;
+	border: none;
+	border-radius: 5px;
+	text-decoration: none;
+	cursor: pointer;
+	margin-left: 10px;
+}
+
+.cancel-button:hover {
+	background-color: #c82333;
+}
+</style>
 </head>
 <body>
-  <h1>결제 성공</h1>
-  <p>고객 키: <span id="cus" th:text="${customerKey}"></span></p>
-  <p>인증 키: <span id="auth" th:text="${authKey}"></span></p>
-  <p>빌링 키: <span id="bil" th:text="${billingKey}"></span></p>
-  <a href="/payTest">다시 시도</a>
-  <button id="testOrder">주문</button>
-  <script>
+	<div class="container">
+		<h1>결제 진행</h1>
+		<p>아래 정보를 확인 후 결제를 진행하세요.</p>
+
+		<div class="info">
+			<h2>결제 정보</h2>
+			<p>
+				<strong>결제 금액:</strong> ₩<span id="amount">78,000</span>
+			</p>
+			<p>
+				<strong>결제일:</strong> <span id="date">2024-08-12</span>
+			</p>
+			<p>
+				<strong>구매자 이름:</strong> <span id="customer-name">김토스</span>
+			</p>
+		</div>
+
+		<button id="pay-button" class="button">결제하기</button>
+		<a href="/" class="cancel-button">취소하기</a>
+	</div>
+
+	<script>
   $('#testOrder').on('click', function() {
 	    let customerKey = $('#cus').text();
 	    let authKey = $('#auth').text();

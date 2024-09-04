@@ -58,7 +58,7 @@ public class BoardControl {
 //	            System.out.println("No files uploaded");
 //	        }
 		 String url = "";
-		  int result =boardService.boardInsert(boardVO);
+		  int result = boardService.boardInsert(boardVO);
 		  if(result > 0 ) {
 			  url = "redirect:/boardList";
 		  }else {
@@ -67,7 +67,7 @@ public class BoardControl {
 		 return url;
 	        
 	    }
-	 @GetMapping("/")
+	 @GetMapping("/sign")
 	    public String showSignaturePage(Model model) {
 	        return "sign/sign";
 	    }
@@ -80,7 +80,7 @@ public class BoardControl {
 	            byte[] imageBytes = Base64.getDecoder().decode(base64Image);
 
 	            // 저장할 디렉토리 경로
-	            String directoryPath = "D:/uploads/signatures";
+	            String directoryPath = "D:/upload/signatures";
 	            File directory = new File(directoryPath);
 
 	            // 디렉토리가 존재하지 않으면 생성
